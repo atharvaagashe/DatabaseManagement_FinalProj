@@ -1,13 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head><title>Sign Up</title></head>
+<head>
+    <title>Sign Up - CineScope</title>
+    <style>
+        body {
+            background-color: #121212;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 6px;
+        }
+
+        .signup-button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-button:hover {
+            background-color: #43A047;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #bbb;
+            text-decoration: none;
+        }
+    </style>
+</head>
 <body>
-<h2>Sign Up</h2>
-<form method="POST" action="/signup">
-    <label>Username:</label><input type="text" name="username"><br>
-    <label>Email:</label><input type="email" name="email"><br>
-    <label>Password:</label><input type="password" name="password"><br>
-    <button type="submit">Register</button>
-</form>
+    <div class="signup-container">
+        <!-- Logo added here -->
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <img src="/images/logo.jpg" alt="CineScope Logo" style="width: 100px; height: auto;">
+        </div>
+
+        <h2>Create an Account</h2>
+        <form method="post" action="/signup">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+            <input type="submit" class="signup-button" value="Sign Up">
+        </form>
+        <a href="/login">Already have an account? Log in</a>
+    </div>
 </body>
 </html>
