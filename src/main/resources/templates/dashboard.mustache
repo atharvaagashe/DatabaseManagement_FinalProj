@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #222;
+            overflow: hidden;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #555;
+        }
+        .navbar-right {
+            float: right;
+            color: #f2f2f2;
+            padding: 12px 16px;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/dashboard">Home</a>
+    <a href="/reviews">Reviews/Ratings</a>
+    <a href="/user">User Info</a>
+    <a href="/movies">Add/Remove Movies</a>
+    <a href="/friends">Friends</a>
+    <div class="navbar-right">
+        Logged in as {{username}}
+    </div>
+</div>
+
+<div class="content">
+    <h2>Welcome to your Dashboard, {{username}}!</h2>
+    <p>Select a section from the navigation bar above to get started.</p>
+</div>
+
+</body>
+</html>
