@@ -40,19 +40,25 @@ public class UserController {
         return "login";
     }
 
+
     @PostMapping("/login")
     public String login(@RequestParam String username,
                     @RequestParam String password,
                     HttpSession session,
                     RedirectAttributes redirectAttributes) {
-        if (userService.authenticateUser(username, password)) {
-            session.setAttribute("username", username);
-            return "redirect:/dashboard";
-        } else {
-            redirectAttributes.addFlashAttribute("error", "Invalid username or password");
-            return "redirect:/login";
-        }
+    if (userService.authenticateUser(username, password)) {
+        session.setAttribute("username", username);
+
+        // Set userId in session
+        Long userId = userService.getUserIdByUsername(username); // You must implement this
+        session.setAttribute("userId", userId);
+
+        return "redirect:/dashboard";
+    } else {
+        redirectAttributes.addFlashAttribute("error", "Invalid username or password");
+        return "redirect:/login";
     }
+}
 
 
 }

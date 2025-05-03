@@ -1,17 +1,15 @@
 package com.watchlist.repository;
 
-
 import com.watchlist.models.Review;
-import com.watchlist.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.sql.SQLException;
 import java.util.List;
+
+import com.watchlist.models.Review;
 
 @Repository
 public class ReviewRepositoryImpl implements ReviewRepository {
@@ -34,6 +32,13 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     public List<Review> findByMovieId(Long movieId) {
         String sql = "SELECT * FROM Review WHERE movie_id = ?";
         return jdbcTemplate.query(sql, reviewRowMapper, movieId);
+    }
+
+
+    @Override
+    public List<Review> findByUserId(Long userId) {
+        String sql = "SELECT * FROM Review WHERE user_id = ?";
+        return jdbcTemplate.query(sql, reviewRowMapper, userId);
     }
 
     @Override
