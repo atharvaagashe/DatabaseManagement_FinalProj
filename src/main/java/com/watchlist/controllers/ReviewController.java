@@ -26,16 +26,27 @@ public class ReviewController {
         return "reviews";
     }
 
-    @GetMapping("/user-reviews")
-    public String getUserReviews(Model model, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
-            userId = 1L; // fallback
-        }
-        List<Review> userReviews = reviewRepository.findByUserId(userId);
-        model.addAttribute("userReviews", userReviews);
-        return "user_reviews";
+    // @GetMapping("/user-reviews")
+    // public String getUserReviews(Model model, HttpSession session) {
+    //     Long userId = (Long) session.getAttribute("userId");
+    //     if (userId == null) {
+    //         userId = 1L; // fallback
+    //     }
+    //     List<Review> userReviews = reviewRepository.findByUserId(userId);
+    //     model.addAttribute("userReviews", userReviews);
+    //     return "user_reviews";
+    // }
+    @GetMapping({"/user-reviews", "/reviews"})
+public String getUserReviews(Model model, HttpSession session) {
+    Long userId = (Long) session.getAttribute("userId");
+    if (userId == null) {
+        userId = 1L; // fallback
     }
+    List<Review> userReviews = reviewRepository.findByUserId(userId);
+    model.addAttribute("userReviews", userReviews);
+    return "user_reviews";
+}
+
 
     @PostMapping("/reviews")
     public String addReview(@ModelAttribute Review review, HttpSession session) {
