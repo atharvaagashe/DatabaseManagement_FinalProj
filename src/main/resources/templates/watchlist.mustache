@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Watchlist</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .movie-card {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        }
+
+        .movie-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .movie-meta {
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Watchlist</h2>
+
+    {{#movies}}
+    <div class="movie-card">
+        <div class="movie-title">{{title}}</div>
+        <div class="movie-meta">
+            Genre: {{genre}}<br>
+            Release Year: {{releaseYear}}
+        </div>
+    </div>
+    {{/movies}}
+
+    {{^movies}}
+    <p>You haven’t added any movies to your watchlist yet.</p>
+    {{/movies}}
+</body>
+</html>
