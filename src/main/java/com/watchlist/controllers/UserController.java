@@ -2,6 +2,7 @@ package com.watchlist.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,6 +58,24 @@ public class UserController {
         return "redirect:/dashboard";
     } else {
         redirectAttributes.addFlashAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+    }
+}
+
+@GetMapping("/user")
+public String showUserInfo(HttpSession session, Model model) {
+    Long userIdLong = (Long) session.getAttribute("userId");
+
+    if (userIdLong != null) {
+        int userId = userIdLong.intValue();  // Convert Long to int
+        User user = userService.getUserById(userId);
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "user"; // corresponds to user.mustache
+        } else {
+            return "redirect:/dashboard"; // fallback if user not found
+        }
+    } else {
         return "redirect:/login";
     }
 }

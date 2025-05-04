@@ -47,10 +47,6 @@ public class DashboardController {
         return "reviews";
     }
 
-    @GetMapping("/user")
-    public String showUserInfo() {
-        return "user";
-    }
 
     @GetMapping("/friends")
     public String showFriends() {

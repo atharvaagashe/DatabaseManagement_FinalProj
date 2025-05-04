@@ -58,4 +58,24 @@ public class UserService {
         return jdbcTemplate.queryForObject(sql, Long.class, username);
     }
     
+    public User getUserById(int userId) {
+        String sql = "SELECT * FROM User WHERE user_id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPasswordHash(rs.getString("password_hash"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+       
 }
