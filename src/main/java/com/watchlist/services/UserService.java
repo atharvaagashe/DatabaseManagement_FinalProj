@@ -4,16 +4,20 @@ import com.watchlist.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.List;
 
 
 @Service
 public class UserService {
 
     private final DataSource dataSource;
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public UserService(DataSource dataSource) {
@@ -51,8 +55,6 @@ public class UserService {
         return false;
     }
     
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     public Long getUserIdByUsername(String username) {
         String sql = "SELECT user_id FROM User WHERE username = ?";
         return jdbcTemplate.queryForObject(sql, Long.class, username);
@@ -77,5 +79,9 @@ public class UserService {
         }
         return null;
     }
-       
+    
+    public List<User> getAllUsers() {
+        String sql = "SELECT * FROM User";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+    }
 }

@@ -50,6 +50,22 @@ public class WatchlistController {
         return "redirect:/movies";
     }
 
+    // Remove from watchlist
+    @PostMapping("/remove")
+    public String removeFromWatchlist(@RequestParam("movieId") int movieId, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            return "redirect:/login";
+        }
+
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            watchlistRepository.removeFromWatchlist(user.getUserId(), movieId);
+        }
+
+        return "redirect:/watchlist";
+    }
+
     // View all watchlisted movies for the user
     @GetMapping({ "", "/" })
     public String viewWatchlist(HttpSession session, Model model) {

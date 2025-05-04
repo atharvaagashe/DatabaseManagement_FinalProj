@@ -7,4 +7,5 @@ public interface WatchlistRepository {
     void addToWatchlist(int userId, int movieId);
     List<Watchlist> findByUserId(int userId); 
     boolean existsByUserIdAndMovieId(int userId, int movieId); // ✅ Add this
+    void removeFromWatchlist(int userId, int movieId);
 }

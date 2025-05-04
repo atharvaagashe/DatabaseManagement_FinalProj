@@ -50,5 +50,10 @@ public class ReviewController {
         reviewRepository.save(review);
         return "redirect:/reviews/" + review.getMovieId();
     }
-
+    
+    @PostMapping("/update-review-rating")
+    public String updateReviewRating(@RequestParam Long reviewId, @RequestParam int rating) {
+        reviewRepository.updateRating(reviewId, rating);
+        return "redirect:/user-reviews";
+    }
 }

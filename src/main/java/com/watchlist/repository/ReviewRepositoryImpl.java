@@ -51,4 +51,10 @@ public class ReviewRepositoryImpl implements ReviewRepository {
                 review.getComment(),
                 Timestamp.valueOf(review.getTimestamp()));
     }
+    
+    @Override
+    public void updateRating(Long reviewId, int rating) {
+        String sql = "UPDATE Review SET rating = ? WHERE review_id = ?";
+        jdbcTemplate.update(sql, rating, reviewId);
+    }
 }

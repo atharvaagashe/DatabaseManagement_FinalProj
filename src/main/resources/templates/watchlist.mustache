@@ -28,6 +28,13 @@
             padding: 1rem;
             margin-bottom: 1rem;
             box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .movie-info {
+            flex: 1;
         }
 
         .movie-title {
@@ -51,6 +58,20 @@
         .btn-back:hover {
             background-color: #2c2c2c;
         }
+        
+        .btn-remove {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-remove:hover {
+            background-color: #b71c1c;
+        }
     </style>
 </head>
 <body>
@@ -62,17 +83,28 @@
 
     {{#movies}}
     <div class="movie-card">
-        <div class="movie-title">{{title}}</div>
-        <div class="movie-meta">
-            Genre: {{genre}}<br>
-            Release Year: {{releaseYear}}
+        <div class="movie-info">
+            <div class="movie-title">{{title}}</div>
+            <div class="movie-meta">
+                Genre: {{genre}}<br>
+                Release Year: {{releaseYear}}
+            </div>
         </div>
+        <form method="post" action="/watchlist/remove">
+            <input type="hidden" name="movieId" value="{{movieId}}">
+            <button type="submit" class="btn-remove">Remove</button>
+        </form>
     </div>
     {{/movies}}
 
     {{^movies}}
-    <p>You haven’t added any movies to your watchlist yet.</p>
+    <p>You haven't added any movies to your watchlist yet.</p>
     {{/movies}}
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add JavaScript functionality if needed for AJAX removal
+    });
+    </script>
 </body>
 </html>

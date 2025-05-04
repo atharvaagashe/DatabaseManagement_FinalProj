@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.watchlist.models.User;
+import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -17,5 +18,11 @@ public class UserRepositoryImpl implements UserRepository {
     public User findByUsername(String username) {
         String sql = "SELECT * FROM User WHERE username = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper<>(User.class));
+    }
+    
+    @Override
+    public List<User> findAllUsers() {
+        String sql = "SELECT * FROM User";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 }
