@@ -34,7 +34,7 @@ public class WatchlistController {
     @Autowired
     private MovieRepository movieRepository;
 
-    // ✅ Add a movie to the user's watchlist
+    // adding to watchlist
     @PostMapping("/add")
     public String addToWatchlist(@RequestParam("movieId") int movieId, HttpSession session) {
         String username = (String) session.getAttribute("username");
@@ -50,7 +50,7 @@ public class WatchlistController {
         return "redirect:/movies";
     }
 
-    // ✅ View all watchlisted movies for the user
+    // View all watchlisted movies for the user
     @GetMapping({ "", "/" })
     public String viewWatchlist(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
