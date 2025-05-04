@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.watchlist.models.User;
 import com.watchlist.services.UserService;
@@ -20,6 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/signup")
     public String signupForm() {
         return "signup";
@@ -32,10 +34,11 @@ public class UserController {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPasswordHash(password); // Hash later
+        user.setPasswordHash(BCrypt.hashpw(password, BCrypt.gensalt())); // Securely hash password here
         userService.registerUser(user);
         return "redirect:/login";
     }
+    
 
     @GetMapping("/login")
     public String loginForm() {

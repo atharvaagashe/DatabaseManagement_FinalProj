@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -47,13 +49,14 @@ public class UserService {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String hashed = rs.getString("password_hash");
-                return password.equals(hashed); // Replace with hashing later
+                return BCrypt.checkpw(password, hashed); // Secure comparison
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+    
     
     public Long getUserIdByUsername(String username) {
         String sql = "SELECT user_id FROM User WHERE username = ?";
