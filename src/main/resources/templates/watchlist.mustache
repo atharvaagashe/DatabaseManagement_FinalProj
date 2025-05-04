@@ -77,9 +77,13 @@
 <body>
 
     <div class="header-row">
-        <h2>Your Watchlist</h2>
+        <div>
+            <h2>Your Watchlist</h2>
+            <p>You have {{watchlistCount}} movies in your watchlist.</p> 
+        </div>
         <a href="/dashboard" class="btn-back">Back to Dashboard</a>
     </div>
+
 
     {{#movies}}
     <div class="movie-card">
@@ -103,7 +107,6 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Add JavaScript functionality if needed for AJAX removal
     });
     </script>
 </body>

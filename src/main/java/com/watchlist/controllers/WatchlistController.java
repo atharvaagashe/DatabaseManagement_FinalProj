@@ -85,8 +85,10 @@ public class WatchlistController {
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
 
+        //int watchlistCount = watchlistRepository.countByUserId(user.getUserId());
         model.addAttribute("movies", movies);
         model.addAttribute("username", username);
+        model.addAttribute("watchlistCount", movies.size());
         return "watchlist";
     }
 }
