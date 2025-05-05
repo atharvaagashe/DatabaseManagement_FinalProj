@@ -44,4 +44,12 @@ public class WatchlistRepositoryImpl implements WatchlistRepository {
         String sql = "DELETE FROM Watchlist WHERE user_id = ? AND movie_id = ?";
         jdbcTemplate.update(sql, userId, movieId);
     }
+
+    @Override
+    public int countByUserId(int userId) {
+        String sql = "SELECT COUNT(*) FROM Watchlist WHERE user_id = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+        return (count != null) ? count : 0;
+    }
+
 }

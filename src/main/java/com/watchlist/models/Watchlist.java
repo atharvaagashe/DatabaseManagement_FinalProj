@@ -4,7 +4,6 @@ public class Watchlist {
     private int userId;
     private int movieId;
 
-    // Optional: add timestamp if you're storing saved_date
     private String savedDate;
 
     // Constructors
